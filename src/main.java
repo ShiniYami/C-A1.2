@@ -12,9 +12,13 @@ public class main {
     }
     public void run(){
 
+
         int valueList[] = new int[]{ 5000, 10000, 50000,  100000, 500000,
                 1000000, 5000000, 10000000, 50000000, 100000000 };
-        int repetitions = 1;
+        int repetitions = 10;
+        long sortHighest[] = new long[]{0,0,0,0,0,0,0,0,0,0};
+        long seqHighest[] = new long[]{0,0,0,0,0,0,0,0,0,0};
+        long recHighest[] = new long[]{0,0,0,0,0,0,0,0,0,0};
         long finalResultListSort[] = new long[valueList.length];
         long finalResultListSeq[] = new long[valueList.length];
         long finalResultListReq[] = new long[valueList.length];
@@ -23,10 +27,19 @@ public class main {
             long sortedMinMaxList[] = new long[repetitions];
             long seqMinMaxList[] = new long[repetitions];
             long reqMinMaxList[] = new long[repetitions];
-            for(int i= 0;i<1;i++){
-                sortedMinMaxList[i] = timeFunction(1,numberCount);
+            for(int i= 0;i<repetitions;i++){
+//                sortedMinMaxList[i] = timeFunction(1,numberCount);
                 seqMinMaxList[i] = timeFunction(2, numberCount);
                 reqMinMaxList[i] = timeFunction(3, numberCount);
+                if(sortedMinMaxList[i]>sortHighest[k]){
+                    sortHighest[k] = sortedMinMaxList[i];
+                }
+                if(seqMinMaxList[i]>seqHighest[k]){
+                    seqHighest[k] = seqMinMaxList[i];
+                }
+                if(reqMinMaxList[i]>recHighest[k]){
+                    recHighest[k] = reqMinMaxList[i];
+                }
             }
             long sortedTotal = 0;
             long  seqTotal = 0;
@@ -67,6 +80,20 @@ public class main {
         System.out.print("]\n\nRecursive min max Averages: ["+finalResultListReq[0]);
         for (int i = 1; i<finalResultListReq.length; i++){
             System.out.print("|"+finalResultListReq[i]);
+        }
+        System.out.print("\n\nHighest times: \nSorted Min Max highest: [");
+        System.out.print(sortHighest[0]+"|");
+        for(int i = 1;i<sortHighest.length;i++){
+            System.out.print(sortHighest[i]+"|");
+        }
+        System.out.print("]\n SeqMinMax highest: ["+seqHighest[0]+"|");
+        for(int i = 1;i<seqHighest.length;i++){
+            System.out.print(seqHighest[i]+"|");
+        }
+        System.out.print("]\n");
+        System.out.print("RecMinMax highest: ["+recHighest[0]+"|");
+        for(int i = 1;i<recHighest.length;i++){
+            System.out.print(recHighest[i]+"|");
         }
         System.out.print("]\n");
     }
